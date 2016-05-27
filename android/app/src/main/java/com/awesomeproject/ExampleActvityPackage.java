@@ -14,10 +14,12 @@ import java.util.List;
  * Created by umeng on 4/21/16.
  */
 public class ExampleActvityPackage implements ReactPackage {
+
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         ArrayList<NativeModule> list = new ArrayList();
         list.add(new ToastModuleAndroid(reactContext));
+        list.add(new DataModule(reactContext));
         return list;
     }
 

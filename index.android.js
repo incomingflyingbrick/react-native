@@ -14,17 +14,25 @@ import {
   ListView,
   Text,
   View,
+  NativeModules,
+  DeviceEventEmitter,
 } from 'react-native';
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
-
-
+var dataModuel = NativeModules.DataModule;
 var MOCKED_MOVIES_DATA = [
-{title: "牛逼", year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}}
+{title: "This is movie title", year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}}
 ];
 
 var movie = MOCKED_MOVIES_DATA[0];
-
+// var ScrollResponderMixin={
+//     mixins: [Subscribable.Mixin],
+//    componentWillMount:function(){
+//      console.log("inside will mount2");
+//      DeviceEventEmitter.addListener('keyboardWillShow',function(e:Event){
+//      });
+//    },
+//  }
 
 
 class AwesomeProject extends Component {
@@ -38,6 +46,9 @@ class AwesomeProject extends Component {
         }),
         loaded:false
       };
+      DeviceEventEmitter.addListener('keyboardWillShow',(e)=>{
+        console.log("Got event");
+      })
     }
 
   render() {
@@ -55,7 +66,6 @@ class AwesomeProject extends Component {
   };
 
   componentDidMount() {
-  console.warn("this is a did mount");
    this.fetchData();
  }
 // getting data from internet
@@ -63,15 +73,17 @@ class AwesomeProject extends Component {
     fetch(REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
-        console.warn(responseData.movies);
+        dataModuel.showData("Finished Loading",1000);
+        console.log("after show toast");
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-         loaded: true,
+          loaded: true,
         });
-      })
-      .done();
+      }).done();
   }
 
+
+  // loading view
   renderLoadingView() {
     return (
       <View style={styles.container}>
@@ -99,8 +111,6 @@ class AwesomeProject extends Component {
 
 }
 
-
-
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -127,6 +137,14 @@ var styles = StyleSheet.create({
   listView: {
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
+  },
+  active:{
+    borderWidth:2,
+    borderColor:'#00ff00'
+  },
+  base:{
+    width:38,
+    height:38,
   },
 });
 
