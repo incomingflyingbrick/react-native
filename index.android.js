@@ -16,6 +16,7 @@ import {
   View,
   NativeModules,
   DeviceEventEmitter,
+  TouchableHighlight,
 } from 'react-native';
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
@@ -23,7 +24,7 @@ var dataModuel = NativeModules.DataModule;
 var MOCKED_MOVIES_DATA = [
 {title: "This is movie title", year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}}
 ];
-
+var bridge = NativeModules.BridgeModule;
 var movie = MOCKED_MOVIES_DATA[0];
 // var ScrollResponderMixin={
 //     mixins: [Subscribable.Mixin],
@@ -34,8 +35,18 @@ var movie = MOCKED_MOVIES_DATA[0];
 //    },
 //  }
 
+class MovieDetail extends Component{
+  render(){
+    return (<Text>"This is a movie detail page"</Text>);
+  }
+};
 
 class AwesomeProject extends Component {
+
+
+  displayMoiveName(name){
+     alert(name);
+  }
 
   constructor(props) {
       super(props);
@@ -80,6 +91,7 @@ class AwesomeProject extends Component {
           loaded: true,
         });
       }).done();
+
   }
 
 
@@ -94,8 +106,12 @@ class AwesomeProject extends Component {
     );
   }
 
-  renderMovie(movie) {
-   return (
+  renderMovie(movie,section,row) {
+    return (
+     <TouchableHighlight onPress={()=>{
+       console.warn(movie.title+" row:"+row);
+       bridge.startMovieActivity();
+    }} underlayColor='#eeeeee'>
      <View style={styles.container}>
        <Image
          source={{uri: movie.posters.thumbnail}}
@@ -106,6 +122,7 @@ class AwesomeProject extends Component {
          <Text style={styles.year}>{movie.year}</Text>
        </View>
      </View>
+     </TouchableHighlight>
    );
  }
 
@@ -149,3 +166,4 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+//AppRegistry.registerComponent('MovieDetail', () => MovieDetail);

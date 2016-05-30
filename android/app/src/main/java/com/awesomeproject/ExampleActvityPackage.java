@@ -20,6 +20,7 @@ public class ExampleActvityPackage implements ReactPackage {
         ArrayList<NativeModule> list = new ArrayList();
         list.add(new ToastModuleAndroid(reactContext));
         list.add(new DataModule(reactContext));
+        list.add(new BridgeModule(reactContext));
         return list;
     }
 
