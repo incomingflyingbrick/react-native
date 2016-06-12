@@ -17,6 +17,8 @@ import {
 var dataModuel = NativeModules.DataModule;
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+//导入 detail.js
+var MovieDetail = require('./detail')
 
 class AwesomeProject extends Component {
 
@@ -35,8 +37,9 @@ class AwesomeProject extends Component {
         clicked:false,
         test:'Sina'
       };
+      //加入事件监听器，可以让native发出事件到react
       DeviceEventEmitter.addListener('data',(e)=>{
-        console.log("Got event");
+        console.warn("Got event");
       })
     }
 
@@ -45,24 +48,29 @@ class AwesomeProject extends Component {
       return this.renderLoadingView();
     }
 
-    // if(this.state.loaded){
-    //   return <MovieDetail title={"Brave Heart"} test={this.state.test} ></MovieDetail>
-    // }
+    if(this.state.clicked){
+      return <MovieDetail title={"Brave Heart"}></MovieDetail>
+    }
 
     return (
       <ListView
       dataSource = {this.state.dataSource}
-      renderRow = {this.renderMovie}
+      renderRow = {this.renderMovie.bind(this)}
       style = {styles.ListView}
       />
     );
-  };
 
+  };
+  //component被展示之后调用
   componentDidMount() {
    this.fetchData();
  }
 
-// Getting data from internet
+ resetState(obj){
+   this.setState(obj);
+ };
+
+// 获取网络数据
  fetchData() {
     fetch(REQUEST_URL)
       .then((response) => response.json())
@@ -76,20 +84,22 @@ class AwesomeProject extends Component {
       }).done();
     }
 
-  // loading view
+  // 展示读取中
   renderLoadingView() {
     return (
       <View style={styles.container}>
         <Text>
-          Loading movies...
+          正在读取电影信息...
         </Text>
       </View>
     );
   }
 
+  // 展示listView的item
   renderMovie(movie,section,row) {
     return (
       <TouchableHighlight onPress={()=>{
+        this.setState({clicked:true});
         console.warn("Row pressed:"+row)
       }} underlayColor='#eeeecc'>
      <View style={styles.container}>

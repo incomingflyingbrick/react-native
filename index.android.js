@@ -20,8 +20,6 @@ var {
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 // import module
 var Awe  = require('./AwesomeProject');
-// calling android native module
-
 
 var ActionBar = React.createClass({
   _renderScene(route,navigator){
