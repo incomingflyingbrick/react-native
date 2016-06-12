@@ -13,13 +13,5 @@ import {
   NativeModules,
   DeviceEventEmitter,
   TouchableHighlight,
-  TextInput,
+  Navigator,
 } from 'react-native';
-
-class MovieDetail extends Component{
-  render(<TextInput></TextInput>);
-}
-
-
-// var styles = StyleSheet.create({
-// });

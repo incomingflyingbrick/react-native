@@ -7,14 +7,12 @@ import android.util.Log;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-
+import com.facebook.react.bridge.ReadableMap;
 
 public class BridgeModule extends ReactContextBaseJavaModule{
 
     public BridgeModule(ReactApplicationContext reactContext) {
         super(reactContext);
-
     }
 
     @Override
@@ -23,9 +21,12 @@ public class BridgeModule extends ReactContextBaseJavaModule{
     }
 
     @ReactMethod
-    public void startMovieActivity(){
+    public void startMovieActivity(ReadableMap readableMap) {
+        Log.d("getData",readableMap.toString());
         Intent intent = new Intent(getCurrentActivity(),MovieDetailActivity.class);
-        getReactApplicationContext().startActivityForResult(intent,999,new Bundle());
-        Log.d("BridgeModule","start activity");
+        Bundle bundle = new Bundle();
+        bundle.putString("movie",readableMap.toString());
+        intent.putExtra("movie",bundle);
+        getReactApplicationContext().startActivityForResult(intent,999,null);
     }
 }

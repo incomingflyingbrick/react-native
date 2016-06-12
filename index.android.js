@@ -1,13 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
-import React, {
-  Component,
-} from 'react';
+//var MOCKED_MOVIES_DATA = [{title: "This is movie title", year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}}];
 
-import {
+var React = require('react-native');
+var {
+  Component,
   AppRegistry,
   Image,
   StyleSheet,
@@ -17,116 +13,50 @@ import {
   NativeModules,
   DeviceEventEmitter,
   TouchableHighlight,
-} from 'react-native';
+  Navigator,
+} = React;
 
+// request url from movie database
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
-var dataModuel = NativeModules.DataModule;
-var MOCKED_MOVIES_DATA = [
-{title: "This is movie title", year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}}
-];
-var bridge = NativeModules.BridgeModule;
-var movie = MOCKED_MOVIES_DATA[0];
-// var ScrollResponderMixin={
-//     mixins: [Subscribable.Mixin],
-//    componentWillMount:function(){
-//      console.log("inside will mount2");
-//      DeviceEventEmitter.addListener('keyboardWillShow',function(e:Event){
-//      });
-//    },
-//  }
+// import module
+var Awe  = require('./AwesomeProject');
+// calling android native module
+
+
+var ActionBar = React.createClass({
+  _renderScene(route,navigator){
+      return(<Awe route={route} navigator={navigator}/>  );
+  },
+
+  render:function(){
+    return <Navigator
+    initialRoute={{name:'My first scene',index:0,component:Awe,title:"this is navigator"}}
+    renderScene={this._renderScene}
+    />
+  }
+});
 
 class MovieDetail extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      movie:props.movie,
+      loaded:false,
+      title:props.title,
+      test:props.test,
+    };
+  }
+
   render(){
-    return (<Text>"This is a movie detail page"</Text>);
+    return (
+      <Text>this is title</Text>
+
+
+  );
   }
 };
 
-class AwesomeProject extends Component {
 
-
-  displayMoiveName(name){
-     alert(name);
-  }
-
-  constructor(props) {
-      super(props);
-      this.state = {
-        movies: null,
-        dataSource: new ListView.DataSource({
-          rowHasChanged:(row1,row2)=> row1!==row2,
-        }),
-        loaded:false
-      };
-      DeviceEventEmitter.addListener('keyboardWillShow',(e)=>{
-        console.log("Got event");
-      })
-    }
-
-  render() {
-    if (!this.state.dataSource) {
-      return this.renderLoadingView();
-    }
-
-    // var movie = this.state.movies[0];
-    // return this.renderMovie(movie);
-    return (<ListView
-      dataSource = {this.state.dataSource}
-      renderRow = {this.renderMovie}
-      style = {styles.ListView}
-      />);
-  };
-
-  componentDidMount() {
-   this.fetchData();
- }
-// getting data from internet
- fetchData() {
-    fetch(REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        dataModuel.showData("Finished Loading",1000);
-        console.log("after show toast");
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-          loaded: true,
-        });
-      }).done();
-
-  }
-
-
-  // loading view
-  renderLoadingView() {
-    return (
-      <View style={styles.container}>
-        <Text>
-          Loading movies...
-        </Text>
-      </View>
-    );
-  }
-
-  renderMovie(movie,section,row) {
-    return (
-     <TouchableHighlight onPress={()=>{
-       console.warn(movie.title+" row:"+row);
-       bridge.startMovieActivity();
-    }} underlayColor='#eeeeee'>
-     <View style={styles.container}>
-       <Image
-         source={{uri: movie.posters.thumbnail}}
-         style={styles.thumbnail}
-       />
-       <View style={styles.rightContainer}>
-         <Text style={styles.title}>{movie.title}</Text>
-         <Text style={styles.year}>{movie.year}</Text>
-       </View>
-     </View>
-     </TouchableHighlight>
-   );
- }
-
-}
 
 var styles = StyleSheet.create({
   container: {
@@ -165,5 +95,10 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
-//AppRegistry.registerComponent('MovieDetail', () => MovieDetail);
+var navStyles = StyleSheet.create({
+    navigationContainer: {
+        flex: 1
+    }
+});
+
+AppRegistry.registerComponent('ActionBar', () => ActionBar);

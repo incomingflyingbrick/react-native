@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 public class ToastModuleAndroid extends ReactContextBaseJavaModule {
     private static final String DURATION_SHORT_KEY = "SHORT";
     private static final String DURATION_LONG_KEY = "LONG";
+
     public ToastModuleAndroid(ReactApplicationContext reactContext) {
         super(reactContext);
     }

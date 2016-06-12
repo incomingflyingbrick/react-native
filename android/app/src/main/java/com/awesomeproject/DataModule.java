@@ -32,6 +32,7 @@ public class DataModule extends ReactContextBaseJavaModule {
 
     public DataModule(ReactApplicationContext reactApplicationContext){
         super(reactApplicationContext);
+        ContextUtil.reactContext = reactApplicationContext;
         reactApplicationContext.addActivityEventListener(new ActivityEventListener() {
             @Override
             public void onActivityResult(int requestCode, int resultCode, Intent data) {
