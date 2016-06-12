@@ -48,10 +48,6 @@ class AwesomeProject extends Component {
       return this.renderLoadingView();
     }
 
-    if(this.state.clicked){
-      return <MovieDetail title={"Brave Heart"}></MovieDetail>
-    }
-
     return (
       <ListView
       dataSource = {this.state.dataSource}
@@ -99,7 +95,7 @@ class AwesomeProject extends Component {
   renderMovie(movie,section,row) {
     return (
       <TouchableHighlight onPress={()=>{
-        this.setState({clicked:true});
+        this.props.navigator.push({index:1});
         console.warn("Row pressed:"+row)
       }} underlayColor='#eeeecc'>
      <View style={styles.container}>

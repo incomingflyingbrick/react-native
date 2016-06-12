@@ -25,12 +25,17 @@ class MovieDetail extends Component{
       des:props.des,
       title:props.title,
       url:props.url,
+      year:props.year,
     };
   }
 
   render(){
     return (
+      <View>
       <Text>{this.state.title}</Text>
+      <Text>{this.state.des}</Text>
+      <Text>{this.state.year}</Text>
+      </View>
     );
   }
 };

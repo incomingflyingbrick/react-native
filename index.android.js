@@ -20,41 +20,26 @@ var {
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 // import module
 var Awe  = require('./AwesomeProject');
+var Detail = require('./detail');
 
 var ActionBar = React.createClass({
+  // render nav
   _renderScene(route,navigator){
-      return(<Awe route={route} navigator={navigator}/>  );
+      if(route.index==0){
+        return(<Awe route={route} navigator={navigator}/>  );
+      }
+      if(route.index==1){
+        return(<Detail route={route} navigator={navigator} title={'brave heart'} des={"This is movie description"}>)
+      }
   },
-
+  // render navigator
   render:function(){
     return <Navigator
-    initialRoute={{name:'My first scene',index:0,component:Awe,title:"this is navigator"}}
+    initialRoute={{name:'movielist',index:0,component:Awe}}
     renderScene={this._renderScene}
     />
   }
 });
-
-class MovieDetail extends Component{
-  constructor(props){
-    super(props)
-    this.state={
-      movie:props.movie,
-      loaded:false,
-      title:props.title,
-      test:props.test,
-    };
-  }
-
-  render(){
-    return (
-      <Text>this is title</Text>
-
-
-  );
-  }
-};
-
-
 
 var styles = StyleSheet.create({
   container: {
