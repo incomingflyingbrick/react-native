@@ -61,13 +61,12 @@ var ActionBar = React.createClass({
   render:function(){
     return (<Navigator
     initialRoute={{name:'Popular Movies',index:0,component:Awe}}
-     renderScene={(route,navigator,data)=>{
-      console.warn("route:"+JSON.stringify(data));
+     renderScene={(route,navigator)=>{
       if(route.index===0){
         return(<Awe route={route} navigator={navigator}/>);
       }
       if(route.index===1){
-        return(<Detail route={route} navigator={navigator} title={'Brave Heart'} des={"This is movie description"}/>);
+        return(<Detail route={route} navigator={navigator} movie={route.passProps.data}/>);
       }
     }}
      navigationBar={
@@ -95,18 +94,6 @@ var styles = StyleSheet.create({
   rightContainer:{
     flex:1
   },
-  title:{
-    fontSize:20,
-    marginBottom:8,
-    textAlign:'center'
-  },
-  year:{
-    textAlign:'center'
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
   active:{
     borderWidth:2,
     borderColor:'#00ff00'
@@ -125,6 +112,7 @@ var styles = StyleSheet.create({
     color: '#00B2EE'
   },
   navBar: {
+    marginTop:25,
     height:48,
     backgroundColor: 'white',
     alignItems:'center',

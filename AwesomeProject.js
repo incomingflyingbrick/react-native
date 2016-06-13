@@ -48,7 +48,7 @@ class AwesomeProject extends Component {
       <ListView
       dataSource = {this.state.dataSource}
       renderRow = {this.renderMovie.bind(this)}
-      style = {styles.ListView}
+      style = {styles.listView}
       />
     );
 
@@ -87,7 +87,7 @@ class AwesomeProject extends Component {
   renderMovie(movie,section,row) {
     return (
       <TouchableHighlight onPress={()=>{
-        this.props.navigator.push({name:"Movie Detail",index:1,data:movie});
+        this.props.navigator.push({name:"Movie Detail",index:1,passProps:{data:movie}});
       }} underlayColor='#eeeecc'>
      <View style={styles.container}>
        <Image
@@ -128,7 +128,7 @@ var styles = StyleSheet.create({
     textAlign:'center'
   },
   listView: {
-    paddingTop: 20,
+    marginTop: 73,
     backgroundColor: '#F5FCFF',
   },
   active:{

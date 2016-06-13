@@ -1,5 +1,12 @@
 package com.awesomeproject;
 
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.View;
+import android.view.Window;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
@@ -9,6 +16,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends ReactActivity {
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(Build.VERSION.SDK_INT>=16){
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            //decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            if(Build.VERSION.SDK_INT>=21){
+                getWindow().setStatusBarColor(getResources().getColor(R.color.blue));
+            }
+        }
+    }
 
     /**
      * Returns the name of the main component registered from JavaScript.

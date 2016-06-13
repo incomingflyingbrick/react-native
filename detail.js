@@ -11,6 +11,7 @@ import {
   View,
   TouchableHighlight,
   Navigator,
+  Linking,
 } from 'react-native';
 
 
@@ -19,26 +20,25 @@ class MovieDetail extends Component{
     super(props)
     this.state={
       movie:props.movie,
-      des:props.des,
-      title:props.title,
-      url:props.url,
-      year:props.year,
     };
+    console.log(JSON.stringify(props.movie));
   }
 
   render(){
     return (
       <View style={styles.container}>
-      <Image style={styles.largeImage} source={{uri:'http://i.imgur.com/UePbdph.jpg'}}/>
-      <Text>{this.state.title}</Text>
-      <Text>{this.state.des}</Text>
-      <Text>{this.state.year}</Text>
+      <Image style={styles.largeImage} source={{uri:this.state.movie.posters.original}}/>
+      <Text style = {styles.textStyle}>{'Title:'+this.state.movie.title}</Text>
+      <Text style = {styles.textStyle}>{'Rating:'+this.state.movie.ratings.audience_score}</Text>
+      <Text style = {styles.textStyle}>{'Year:'+this.state.movie.year}</Text>
+      <Text onPress={()=>{
+        Linking.openUrl(this.state.movie.links.alternate);
+      }} style = {styles.textStyle}>{'Link:'+this.state.movie.links.alternate}</Text>
       </View>
     );
   }
+
 };
-
-
 
 var styles = StyleSheet.create({
   container: {
@@ -47,6 +47,12 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  textStyle:{
+    marginTop:10,
+    fontSize:16,
+    fontWeight:'200',
+    color:'black'
   },
   largeImage: {
     width: 106,
