@@ -22,10 +22,6 @@ var MovieDetail = require('./detail')
 
 class AwesomeProject extends Component {
 
-  displayMoiveName(name){
-     alert(name);
-  }
-
   constructor(props) {
       super(props);
       this.state = {
@@ -62,10 +58,6 @@ class AwesomeProject extends Component {
    this.fetchData();
  }
 
- resetState(obj){
-   this.setState(obj);
- };
-
 // 获取网络数据
  fetchData() {
     fetch(REQUEST_URL)
@@ -95,8 +87,7 @@ class AwesomeProject extends Component {
   renderMovie(movie,section,row) {
     return (
       <TouchableHighlight onPress={()=>{
-        this.props.navigator.push({name:"Movie Detail",index:1});
-        console.warn("push navigator")
+        this.props.navigator.push({name:"Movie Detail",index:1,data:movie});
       }} underlayColor='#eeeecc'>
      <View style={styles.container}>
        <Image

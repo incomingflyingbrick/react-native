@@ -17,7 +17,6 @@ var {
   TouchableOpacity
 } = React;
 
-
 var NavigationBarRouteMapper = {
 
   LeftButton: function(route, navigator, index, navState) {
@@ -38,26 +37,18 @@ var NavigationBarRouteMapper = {
   },
 
   RightButton: function(route, navigator, index, navState) {
-    if(route.index===1){
-      return null;
-    }
+    return null;
   },
 
   Title: function(route, navigator, index, navState) {
     return (
-      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+      <Text style={styles.navBarTitleText}>
         {route.name}
       </Text>
     );
   },
 
 };
-
-function newRandomRoute() {
-  return {
-    title: '#' + Math.ceil(Math.random() * 1000),
-  };
-}
 
 // request url from movie database
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
@@ -66,22 +57,20 @@ var Awe  = require('./AwesomeProject');
 var Detail = require('./detail');
 
 var ActionBar = React.createClass({
-  // render nav
-  _renderScene(route,navigator){
-      console.warn("route:"+route.index);
-      if(route.index===0){
-        return(<Awe route={route} navigator={navigator}/>);
-      }
-      // }else if(route.index===1){
-      //    return(<Detail route={route} navigator={navigator} title={'Brave Heart'} des={"This is movie description"}>);
-      // }
-    },
-  // render navigator
+   // render navigator
   render:function(){
     return (<Navigator
     initialRoute={{name:'Popular Movies',index:0,component:Awe}}
-    renderScene={this._renderScene}
-    navigationBar={
+     renderScene={(route,navigator,data)=>{
+      console.warn("route:"+JSON.stringify(data));
+      if(route.index===0){
+        return(<Awe route={route} navigator={navigator}/>);
+      }
+      if(route.index===1){
+        return(<Detail route={route} navigator={navigator} title={'Brave Heart'} des={"This is movie description"}/>);
+      }
+    }}
+     navigationBar={
            <Navigator.NavigationBar
              routeMapper={NavigationBarRouteMapper}
              style = {styles.navBar}
@@ -89,14 +78,10 @@ var ActionBar = React.createClass({
          }
     />);
   }
-
-
-
-
 });
 
 var styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -140,24 +125,26 @@ var styles = StyleSheet.create({
     color: '#00B2EE'
   },
   navBar: {
+    height:48,
     backgroundColor: 'white',
+    alignItems:'center',
+    justifyContent: 'center',
   },
   navBarText: {
-    fontSize: 16,
+    fontSize: 20,
     marginVertical: 10,
-    alignSelf:'center'
+    alignSelf:'center',
+    fontWeight: '300',
   },
   navBarTitleText: {
+    fontSize:16,
     color: 'black',
     fontWeight: '500',
-    marginVertical: 9,
+    alignSelf:'center',
+    marginTop:20,
+    marginRight:70,
   },
 });
 
-var navStyles = StyleSheet.create({
-    navigationContainer: {
-        flex: 1
-    }
-});
 
 AppRegistry.registerComponent('ActionBar', () => ActionBar);

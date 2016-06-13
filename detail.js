@@ -7,11 +7,8 @@ import {
   AppRegistry,
   Image,
   StyleSheet,
-  ListView,
   Text,
   View,
-  NativeModules,
-  DeviceEventEmitter,
   TouchableHighlight,
   Navigator,
 } from 'react-native';
@@ -31,7 +28,8 @@ class MovieDetail extends Component{
 
   render(){
     return (
-      <View>
+      <View style={styles.container}>
+      <Image style={styles.largeImage} source={{uri:'http://i.imgur.com/UePbdph.jpg'}}/>
       <Text>{this.state.title}</Text>
       <Text>{this.state.des}</Text>
       <Text>{this.state.year}</Text>
@@ -45,14 +43,14 @@ class MovieDetail extends Component{
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  thumbnail: {
-    width: 53,
-    height: 81,
+  largeImage: {
+    width: 106,
+    height: 162,
   },
   rightContainer:{
     flex:1
