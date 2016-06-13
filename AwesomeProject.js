@@ -95,8 +95,8 @@ class AwesomeProject extends Component {
   renderMovie(movie,section,row) {
     return (
       <TouchableHighlight onPress={()=>{
-        this.props.navigator.push({index:1});
-        console.warn("Row pressed:"+row)
+        this.props.navigator.push({name:"Movie Detail",index:1});
+        console.warn("push navigator")
       }} underlayColor='#eeeecc'>
      <View style={styles.container}>
        <Image

@@ -14,7 +14,50 @@ var {
   DeviceEventEmitter,
   TouchableHighlight,
   Navigator,
+  TouchableOpacity
 } = React;
+
+
+var NavigationBarRouteMapper = {
+
+  LeftButton: function(route, navigator, index, navState) {
+    if (index === 0) {
+      return null;
+    }
+    var previousRoute = navState.routeStack[index - 1];
+
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.pop()}
+        style={styles.navBarLeftButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText]}>
+          Back
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+
+  RightButton: function(route, navigator, index, navState) {
+    if(route.index===1){
+      return null;
+    }
+  },
+
+  Title: function(route, navigator, index, navState) {
+    return (
+      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+        {route.name}
+      </Text>
+    );
+  },
+
+};
+
+function newRandomRoute() {
+  return {
+    title: '#' + Math.ceil(Math.random() * 1000),
+  };
+}
 
 // request url from movie database
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
@@ -25,20 +68,31 @@ var Detail = require('./detail');
 var ActionBar = React.createClass({
   // render nav
   _renderScene(route,navigator){
-      if(route.index==0){
-        return(<Awe route={route} navigator={navigator}/>  );
+      console.warn("route:"+route.index);
+      if(route.index===0){
+        return(<Awe route={route} navigator={navigator}/>);
       }
-      if(route.index==1){
-        return(<Detail route={route} navigator={navigator} title={'brave heart'} des={"This is movie description"}>)
-      }
-  },
+      // }else if(route.index===1){
+      //    return(<Detail route={route} navigator={navigator} title={'Brave Heart'} des={"This is movie description"}>);
+      // }
+    },
   // render navigator
   render:function(){
-    return <Navigator
-    initialRoute={{name:'movielist',index:0,component:Awe}}
+    return (<Navigator
+    initialRoute={{name:'Popular Movies',index:0,component:Awe}}
     renderScene={this._renderScene}
-    />
+    navigationBar={
+           <Navigator.NavigationBar
+             routeMapper={NavigationBarRouteMapper}
+             style = {styles.navBar}
+           />
+         }
+    />);
   }
+
+
+
+
 });
 
 var styles = StyleSheet.create({
@@ -75,6 +129,28 @@ var styles = StyleSheet.create({
   base:{
     width:38,
     height:38,
+  },
+  navBarLeftButton: {
+    paddingLeft: 10,
+  },
+  navBarRightButton: {
+    paddingRight: 10,
+  },
+  navBarButtonText: {
+    color: '#00B2EE'
+  },
+  navBar: {
+    backgroundColor: 'white',
+  },
+  navBarText: {
+    fontSize: 16,
+    marginVertical: 10,
+    alignSelf:'center'
+  },
+  navBarTitleText: {
+    color: 'black',
+    fontWeight: '500',
+    marginVertical: 9,
   },
 });
 

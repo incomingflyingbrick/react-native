@@ -58,6 +58,7 @@ public class DataModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void showData(String message,int duration){
+        Log.d("dataModule","making toast");
         Toast.makeText(getReactApplicationContext(),message,duration).show();
         WritableMap map = Arguments.createMap();
         map.putString("data1","mydata");
