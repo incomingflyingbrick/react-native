@@ -17,11 +17,6 @@ import java.util.List;
 
 public class MainActivity extends ReactActivity {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        ContextUtil.context = getApplicationContext();
-    }
 
     @Override
     protected void onResume() {

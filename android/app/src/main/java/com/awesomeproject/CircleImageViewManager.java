@@ -1,5 +1,6 @@
 package com.awesomeproject;
 
+import android.os.Build;
 import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -24,9 +25,9 @@ public class CircleImageViewManager extends SimpleViewManager<CircleImageView> {
         Glide.with(ContextUtil.context).load(src).centerCrop().placeholder(android.R.mipmap.sym_def_app_icon).into(view);
     }
 
-    @ReactProp(name = "borderRadius", defaultFloat = 0f)
-    public void setBorderRadius(CircleImageView view, float borderRadius) {
-        view.setBorderWidth((int)borderRadius);
+    @ReactProp(name = "borderRadius", defaultInt = 2)
+    public void setBorderRadius(CircleImageView view, int borderRadius) {
+        view.setBorderWidth(borderRadius);
     }
 
     @Override
@@ -37,6 +38,10 @@ public class CircleImageViewManager extends SimpleViewManager<CircleImageView> {
 
     @Override
     protected CircleImageView createViewInstance(ThemedReactContext reactContext) {
-        return new CircleImageView(reactContext);
+        CircleImageView circleImageView = new CircleImageView(reactContext);
+        if(Build.VERSION.SDK_INT>=21){
+            circleImageView.setImageDrawable(reactContext.getDrawable(android.R.mipmap.sym_def_app_icon));
+        }
+        return circleImageView;
     }
 }

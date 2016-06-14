@@ -13,7 +13,8 @@ import {
   Navigator,
   Linking,
 } from 'react-native';
-
+// import custom view
+var CircleImageView = require('./CircleImageView');
 
 class MovieDetail extends Component{
   constructor(props){
@@ -34,6 +35,7 @@ class MovieDetail extends Component{
       <Text onPress={()=>{
         Linking.openUrl(this.state.movie.links.alternate);
       }} style = {styles.textStyle}>{'Link:'+this.state.movie.links.alternate}</Text>
+      <CircleImageView style={styles.circleImage} src={this.state.movie.posters.original}  borderRadius={5}/>
       </View>
     );
   }
@@ -63,6 +65,10 @@ var styles = StyleSheet.create({
     marginBottom:8,
     textAlign:'center'
   },
+  circleImage:{
+    width:30,
+    height:30
+  }
 });
 
 module.exports = MovieDetail;

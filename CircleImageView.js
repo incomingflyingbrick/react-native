@@ -1,3 +1,4 @@
+'use strict';
 import { PropTypes } from 'react';
 import { requireNativeComponent, View } from 'react-native';
 
@@ -10,4 +11,4 @@ var iface = {
   },
 };
 
-module.exports = requireNativeComponent('CirclemageView', iface);
+module.exports = requireNativeComponent('CircleImageView', iface);
