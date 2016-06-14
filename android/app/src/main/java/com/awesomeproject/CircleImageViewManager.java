@@ -1,14 +1,13 @@
 package com.awesomeproject;
 
-import android.os.Build;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.ViewProps;
 import com.facebook.react.uimanager.annotations.ReactProp;
-
+import com.squareup.picasso.Picasso;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -22,7 +21,7 @@ public class CircleImageViewManager extends SimpleViewManager<CircleImageView> {
 
     @ReactProp(name = "src")
     public void setSrc(CircleImageView view, @Nullable String src) {
-        Glide.with(ContextUtil.context).load(src).centerCrop().placeholder(android.R.mipmap.sym_def_app_icon).into(view);
+        Picasso.with(ContextUtil.context).load(src).placeholder(android.R.drawable.checkbox_on_background).into(view);
     }
 
     @ReactProp(name = "borderRadius", defaultInt = 2)
@@ -38,10 +37,6 @@ public class CircleImageViewManager extends SimpleViewManager<CircleImageView> {
 
     @Override
     protected CircleImageView createViewInstance(ThemedReactContext reactContext) {
-        CircleImageView circleImageView = new CircleImageView(reactContext);
-        if(Build.VERSION.SDK_INT>=21){
-            circleImageView.setImageDrawable(reactContext.getDrawable(android.R.mipmap.sym_def_app_icon));
-        }
-        return circleImageView;
+        return new CircleImageView(reactContext);
     }
 }

@@ -33,7 +33,7 @@ class MovieDetail extends Component{
       <Text style = {styles.textStyle}>{'Rating:'+this.state.movie.ratings.audience_score}</Text>
       <Text style = {styles.textStyle}>{'Year:'+this.state.movie.year}</Text>
       <Text onPress={()=>{
-        Linking.openUrl(this.state.movie.links.alternate);
+        Linking.openUrl('http://stackoverflow.com/questions/35501084/react-native-linking-to-another-app').catch(err=>console.error("Error",err));
       }} style = {styles.textStyle}>{'Link:'+this.state.movie.links.alternate}</Text>
       <CircleImageView style={styles.circleImage} src={this.state.movie.posters.original}  borderRadius={5}/>
       </View>
@@ -66,8 +66,8 @@ var styles = StyleSheet.create({
     textAlign:'center'
   },
   circleImage:{
-    width:30,
-    height:30
+    width:100,
+    height:100
   }
 });
 
