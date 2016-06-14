@@ -53,6 +53,7 @@ class AwesomeProject extends Component {
     );
 
   };
+
   //component被展示之后调用
   componentDidMount() {
    this.fetchData();
@@ -128,7 +129,7 @@ var styles = StyleSheet.create({
     textAlign:'center'
   },
   listView: {
-    marginTop: 73,
+    marginTop: 47,
     backgroundColor: '#F5FCFF',
   },
   active:{

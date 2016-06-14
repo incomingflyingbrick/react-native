@@ -17,17 +17,18 @@ import java.util.List;
 
 public class MainActivity extends ReactActivity {
 
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        ContextUtil.context = getApplicationContext();
+    }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
+    protected void onResume() {
+        super.onResume();
         if(Build.VERSION.SDK_INT>=16){
             View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            //decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            if(Build.VERSION.SDK_INT>=21){
-                getWindow().setStatusBarColor(getResources().getColor(R.color.blue));
-            }
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
     }
 

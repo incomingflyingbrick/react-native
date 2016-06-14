@@ -1,5 +1,7 @@
 package com.awesomeproject;
 
+import android.content.Context;
+
 import com.facebook.react.bridge.ReactContext;
 
 /**
@@ -7,4 +9,5 @@ import com.facebook.react.bridge.ReactContext;
  */
 public class ContextUtil {
     public static ReactContext reactContext;
+    public static Context context;
 }

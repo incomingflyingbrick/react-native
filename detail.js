@@ -58,15 +58,9 @@ var styles = StyleSheet.create({
     width: 106,
     height: 162,
   },
-  rightContainer:{
-    flex:1
-  },
   title:{
     fontSize:20,
     marginBottom:8,
-    textAlign:'center'
-  },
-  year:{
     textAlign:'center'
   },
 });

@@ -112,7 +112,6 @@ var styles = StyleSheet.create({
     color: '#00B2EE'
   },
   navBar: {
-    marginTop:25,
     height:48,
     backgroundColor: 'white',
     alignItems:'center',
