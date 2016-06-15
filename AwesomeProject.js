@@ -13,6 +13,7 @@ import {
   NativeModules,
   DeviceEventEmitter,
   TouchableHighlight,
+  DrawerLayoutAndroid,
 } from 'react-native';
 var dataModuel = NativeModules.DataModule;
 
@@ -106,6 +107,13 @@ class AwesomeProject extends Component {
 }
 
 var styles = StyleSheet.create({
+  containerDraw: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
