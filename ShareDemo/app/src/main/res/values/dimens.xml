@@ -1,9 +1,0 @@
-<resources>
-
-    
-    <!-- 分享 -->
-    <dimen name="alphabet_size">12dip</dimen>
-    <dimen name="umeng_socialize_pad_window_height">350dip</dimen>
-    <dimen name="umeng_socialize_pad_window_width">580dip</dimen>
-
-</resources>
