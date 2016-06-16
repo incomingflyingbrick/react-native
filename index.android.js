@@ -14,7 +14,7 @@ var {
   DeviceEventEmitter,
   TouchableHighlight,
   Navigator,
-  TouchableOpacity
+  TouchableOpacity,
 } = React;
 
 var NavigationBarRouteMapper = {

@@ -39,7 +39,6 @@ public class DataModule extends ReactContextBaseJavaModule {
                 Log.d("activity","RequestCode:"+requestCode+" ResultCode:"+requestCode);
             }
         });
-
     }
 
     @Override
@@ -58,15 +57,11 @@ public class DataModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void showData(String message,int duration){
-        Log.d("dataModule","making toast");
         Toast.makeText(getReactApplicationContext(),message,duration).show();
         WritableMap map = Arguments.createMap();
         map.putString("data1","mydata");
-        map.putString("data2","mydata2");
+        map.putString("data2","Received input event");
         sendEvent(getReactApplicationContext(),"keyboardWillShow",map);
-//        Log.d("react","sending evernt");
-//        Intent intent = new Intent(getReactApplicationContext(),DetailActivity.class);
-//        getReactApplicationContext().startActivityForResult(intent,100,null);
     }
 
     @ReactMethod
