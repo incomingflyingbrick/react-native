@@ -54,14 +54,22 @@ public class DataModule extends ReactContextBaseJavaModule {
         constants.put(DURATION_LONG_KEY, Toast.LENGTH_LONG);
         return super.getConstants();
     }
-
+    //    React支持的参数
+//    Boolean -> Bool
+//    Integer -> Number
+//    Double -> Number
+//    Float -> Number
+//    String -> String
+//    Callback -> function
+//    ReadableMap -> Object
+//    ReadableArray -> Array
     @ReactMethod
     public void showData(String message,int duration){
         Toast.makeText(getReactApplicationContext(),message,duration).show();
         WritableMap map = Arguments.createMap();
         map.putString("data1","mydata");
         map.putString("data2","Received input event");
-        sendEvent(getReactApplicationContext(),"keyboardWillShow",map);
+        sendEvent(getReactApplicationContext(),"exampleEventName",map);
     }
 
     @ReactMethod

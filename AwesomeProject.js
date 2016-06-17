@@ -34,10 +34,14 @@ class AwesomeProject extends Component {
         clicked:false,
         test:'Sina'
       };
+
+    }
+
+    componentWillMount(){
       //加入事件监听器，可以让native发出事件到react
-      DeviceEventEmitter.addListener('data',(e)=>{
+      DeviceEventEmitter.addListener('exampleEventName',(e)=>{
         console.warn("Got event");
-      })
+      });
     }
 
   render() {

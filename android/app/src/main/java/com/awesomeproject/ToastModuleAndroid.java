@@ -35,7 +35,15 @@ public class ToastModuleAndroid extends ReactContextBaseJavaModule {
         objectHashMap.put(DURATION_LONG_KEY,Toast.LENGTH_LONG);
         return objectHashMap;
     }
-
+//    React支持的参数
+//    Boolean -> Bool
+//    Integer -> Number
+//    Double -> Number
+//    Float -> Number
+//    String -> String
+//    Callback -> function
+//    ReadableMap -> Object
+//    ReadableArray -> Array
     @ReactMethod
     public void makeToast(String message, int duration){
         Toast.makeText(getReactApplicationContext(),message,duration).show();

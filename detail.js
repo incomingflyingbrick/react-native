@@ -16,6 +16,7 @@ import {
 // import custom view
 var CircleImageView = require('./CircleImageView');
 var DrawerLayout = require('./drawer');
+//var Camera = require('react-native-camera');
 class MovieDetail extends Component{
   constructor(props){
     super(props)
@@ -27,9 +28,7 @@ class MovieDetail extends Component{
   }
 
   render(){
-    if(this.state.clicked){
-        return (<DrawerLayout/>)
-    }
+    
     return (
       <View style={styles.container}>
       <Image style={styles.largeImage} source={{uri:this.state.movie.posters.original}}/>
@@ -37,12 +36,12 @@ class MovieDetail extends Component{
       <Text style = {styles.textStyle}>{'Rating:'+this.state.movie.ratings.audience_score}</Text>
       <Text style = {styles.textStyle}>{'Year:'+this.state.movie.year}</Text>
       <Text onPress={()=>{
-        Linking.openUrl('http://stackoverflow.com/questions/35501084/react-native-linking-to-another-app').catch(err=>console.error("Error",err));
+        //Linking.openUrl('http://stackoverflow.com/questions/35501084/react-native-linking-to-another-app').catch(err=>console.error("Error",err));
       }} style = {styles.textStyle}>{'Link:'+this.state.movie.links.alternate}</Text>
       <CircleImageView style={styles.circleImage} src={this.state.movie.posters.original}  borderRadius={5}
       onPress={
         ()=>{
-          this.setState({clicked:true});
+          console.warn("Clicked Circle Image");
         }
       }
       />
